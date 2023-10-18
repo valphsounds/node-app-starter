@@ -1,5 +1,6 @@
 // dbconf - Database Config File
 const {
+  NODE_ENV,
   DB_USER,
   DB_PASSWORD,
   DB_HOST,
@@ -8,6 +9,5 @@ const {
 } = process.env;
 
 module.exports = {
-  url: `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`,
-  urlLocal: 'mongodb://localhost:27017/myApp'
+  url: NODE_ENV === 'local' ? `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}` : `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`
 };
