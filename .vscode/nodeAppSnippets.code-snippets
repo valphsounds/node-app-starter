@@ -1,48 +1,13 @@
-This is how my html.json-file looks like: 
 {
-	// Place your snippets for html here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
+	// Place your node-app-starter workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
 	// Example:
 	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-	"Starter HTML file": {
-		"prefix": "htmlstart",
-		"body": [
-			"<!DOCTYPE html>",
-			"<html lang=\"en\">",
-			"<head>",
-			"    <meta charset=\"UTF-8\">",
-			"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
-			"    <link rel=\"stylesheet\" href=\"style.css\">",
-			"    <title>Website</title>",
-			"</head>",
-			"<body>",
-			"    <h1>Website</h1>",
-			"    ",
-			"    <script src=\"main.js\"></script>",
-			"</body>",
-			"</html>"
-		],
-		"description": "HTML file starter with connected style.css and main.js"
-	}
-}
-
-This is how my js.json-file looks like: 
-{
-	// Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
+	// 	"scope": "javascript,typescript",
 	// 	"prefix": "log",
 	// 	"body": [
 	// 		"console.log('$1');",
@@ -51,6 +16,7 @@ This is how my js.json-file looks like:
 	// 	"description": "Log output to console"
 	// }
 
+	// JavaScript
 	"Expressapp with MongoDB": {
 		"prefix": "xmdb",
 		"body": [
@@ -109,6 +75,17 @@ This is how my js.json-file looks like:
 		],
 		"description": "App Use Connected Routes"
 	},
+	"Env File": {
+		"prefix": "envfile",
+		"body": [
+			"NODE_MODE = 'LOCAL'",
+			"DB_HOST = 'localhost'",
+			"DB_PORT = '27017'",
+			"DB_NAME = $1",
+			"$1_jwtPrivateKey = $2",
+		],
+		"description": "Local .env-file"
+	},
 	"Database Config File": {
 		"prefix": "dbconf",
 		"body": [
@@ -118,11 +95,12 @@ This is how my js.json-file looks like:
 			"  DB_HOST,",
 			"  DB_PORT,",
 			"  DB_NAME,",
+			"  NODE_MODE,"
 			"} = process.env;",
 			"",
+			"const connectionString = NODE_MODE === 'LOCAL' ? `\\${DB_HOST}:\\${DB_PORT}/\\${DB_NAME}` : `\\${DB_USER}:\\${DB_PASSWORD}@\\${DB_HOST}:\\${DB_PORT}/\\${DB_NAME}?authSource=admin`"
 			"module.exports = {",
-			"  url: `mongodb://\\${DB_USER}:\\${DB_PASSWORD}@\\${DB_HOST}:\\${DB_PORT}/\\${DB_NAME}?authSource=admin`,",
-			"  urlLocal: 'mongodb://localhost:27017/$1'",
+			"  url: `mongodb://\\${connectionString}`,",
 			"};"
 		],
 		"description": "Config file for mongodb."
@@ -506,5 +484,27 @@ This is how my js.json-file looks like:
 			"module.exports = router;"
 		],
 		"description": "File Object Routes file for mongodb using express"
+	},
+
+	// HTML
+	"Starter HTML file": {
+		"prefix": "htmlstart",
+		"body": [
+			"<!DOCTYPE html>",
+			"<html lang=\"en\">",
+			"<head>",
+			"    <meta charset=\"UTF-8\">",
+			"    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+			"    <link rel=\"stylesheet\" href=\"style.css\">",
+			"    <title>$1</title>",
+			"</head>",
+			"<body>",
+			"    <h1>$1</h1>",
+			"    ",
+			"    <script src=\"$2.js\"></script>",
+			"</body>",
+			"</html>"
+		],
+		"description": "HTML file starter with connected style.css and main.js"
 	}
 }
